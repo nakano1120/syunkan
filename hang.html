@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="なっかのう" />
+    <meta name="twitter:title" content="瞬間韓単語" />
+    <meta name="twitter:description" content="韓国語力を向上するページです。" />
+    <meta name="twitter:image" content="https://syunkaneitango.herokuapp.com/kantan.png" />
+    <meta name="twitter:url" content="https://syunkaneitango.herokuapp.com/hang.html" />
+    <title>瞬間韓単語</title>
+    <style>
+    body{
+        margin: 20px;	/* bodyの外側の余白を指定する */
+        padding: 50px 10px 50px 10px;	/* bodyの内側余白を指定する(上:右:下:左) */
+        background-color:#eeeeee;
+    }
+    .Header {
+        position: fixed;	/* ヘッダーを固定する */
+        top: 0;	/* 上部から配置の基準位置を決める */ 
+        left: 0;	/* 左から配置の基準位置を決める */ 
+        width: 100%;	/* ヘッダーの横幅を指定する */
+        height: 35px;	/* ヘッダーの高さを指定する */
+        padding: 10px;	/* ヘッダーの余白を指定する(上下左右) */
+        background-color: #333333;	/* ヘッダーの背景色を指定する */
+        color: #ffffff;	/* フォントの色を指定する */
+        font-size:150%;
+    }	
+    .Contents {
+        width: 100%;	/* コンテンツの横幅を指定する */
+        overflow: auto; /* コンテンツの表示を自動に設定（スクロール） */
+    }
+    .box11{
+        padding: 0.5em 1em;
+        margin: 2em 0;
+        color: #4a4d5e;
+        background: white;
+        border-top: solid 5px #5d627b;
+        box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
+    }
+    .box11 p {
+        margin: 0; 
+        padding: 10px;
+    }
+    .box12{
+        display:none;
+        padding: 0.5em 1em;
+        margin: 2em 0;
+        color: #4a4d5e;
+        background: white;
+        border-top: solid 5px #5d627b;
+        box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
+    }
+    .box12 p {
+        margin: 0; 
+        padding: 10px;
+    }
+    .center{
+        text-align:center;
+    }
+    input[type="text"]{
+        outline: none;
+        border: 1px solid #aaa;
+        -webkit-transition: all .3s;
+        transition: all .3s;
+        width:70%;
+        text-align:center;
+        height:25px;
+        font-size:20px;
+    }
+    input[type="text"]:focus{
+        box-shadow: 0 0 7px #1abc9c;
+        border: 1px solid #1abc9c;
+    }
+    #moji{
+        border-radius: 3px ;
+        padding: 5px;
+        background-color: skyblue;
+    }
+    .btn-push {
+        display: inline-block;
+        max-width: 180px;
+        text-align: left;
+        background-color: #1abc9c;
+        font-size: 16px;
+        color: #FFF;
+        text-decoration: none;
+        font-weight: bold;
+        padding: 10px 24px;
+        border-radius: 4px;
+        border-bottom: 4px solid #1add9c;
+    }
+
+    .btn-push:active {
+        transform: translateY(4px);
+        border-bottom: none;
+    }
+    .box2 {
+        display:none;
+        border: 1px dashed #ccc;
+        padding: 0.5em 1em;
+        margin: 2em 0;
+        font-weight: bold;
+        color: #ff0000;/*文字色*/
+        background: #FFF;
+        border: solid 3px #d36060;/*線*/
+        border-radius: 10px;/*角の丸み*/
+    }
+    .box2 p {
+        margin: 0; 
+        padding: 0;
+    }
+    #mono2{
+        color: #00aa00;
+        border: solid 3px #60d373;/*線*/
+    }
+    .lin{
+        float:right;
+        color:red;
+        padding: 0px 50px;
+    }
+    #twitter{
+        display:none;
+    }
+    .twitter {
+        background-color: #008DDE;
+        box-shadow: 0 4px 0 #0078BD;
+        
+        display: inline;
+        position: relative;
+        font-family: Arial;
+        font-size: 14px;
+        font-weight: bold;
+        text-align: center;
+        text-decoration: none;
+        color: white;
+        border-radius: 5px;
+        padding: 14px 80px;
+    }
+    .twitter:active {
+    top: 2px;
+        box-shadow: 0 2px 0 #0078BD;
+    }
+    .twitter:hover {
+        background-color: #1397D8;
+    }
+    </style>
+</head>
+<body>
+    <div class="Header">瞬間韓単語<a href="eitan.html" class="lin">瞬間英単語へ</a></div>	
+    <div class="Contents">	
+        <div class="box11">
+            <p>
+                レベル選択<br>
+                <select id="level">
+                        <option value="0">=選択してください=</option>
+                        <option value="1">レベル1（〜は）</option>
+                        <option value="2">レベル2（名詞1）</option>
+                        <option value="3">レベル3（名詞2）</option>
+                        <option value="4">レベル4（お金）</option>
+                        <option value="5">レベル5（学校）</option>
+                        <option value="6">レベル6（会話）</option>
+                        <option value="7">レベル7（天気）</option>
+                </select>
+                <input type="button" value="開始する" onclick="kantango();">
+                <div id="twitter">
+                        <a href="#" class="twitter" onclick="botan();">Twitter</a>
+                </div>
+            </p>
+        </div>
+        <div class="box12 center" id="box12">
+            <p>
+                <div id="mono"class="box2">
+                    <p>正解不正解</p>
+                </div>
+                <div id="mono2"class="box2">
+                    <p>正解不正解</p>
+                </div>
+                <h1 id="monda">問題文</h1>
+                <span id="moji">●文字で回答</span><br><br>
+                <input type="text" id="kotae">
+                <div class="container">
+                    <a href="#" class="btn-push" onclick="kaitou();">回答</a>
+                </div>
+        </div>
+    </div>
+    <script>
+        var tango1=["나는","당신은","그는","그녀는","남자","여자","이것은","그것은","저것은","이름"]
+        var tantan1=["私は","あなたは","彼は","彼女は","男","女","これは","それは","あれは","どれですか","名前"]
+        var tango2=["펜","사과","오렌지","개","고양이","내","집","내가","안녕하세요","사람"]
+        var tantan2=["ペン","りんご","オレンジ","犬","猫","私の","家","私が","こんにちは","人"]
+        var tango3=["노래","어머니","아버지","야구","바다","가치","포도","슈퍼","가구","단어"]
+        var tantan3=["歌","お母さん","お父さん","野球","海","価値","ぶどう","スーパーマーケット","家具","単語"]
+        var tango4=["돈","가족","학교","숫자","요일","동물","계산","가격","쓰다","모자라다"]
+        var tantan4=["お金","家族","学校","数字","曜日","動物","お会計","価格","使う","足りない"]
+        var tango5=["유치원","초등학교","중학교","고등학교","대학","대학원","전문","분야","국어","수학"]
+        var tantan5=["幼稚園","小学校","中学校","高校","大学","大学院","専門","分野","国語","数学"]
+        var tango6=["맛","시간","관심","수업","일","정말","예","아니오","약속","팬"]
+        var tantan6=["味","時間","関心","授業","仕事","本当に","はい","いいえ","約束","ファン"]
+        var tango7=["날씨","일기 예보","맑음","비","흐림","눈","태풍","벼락","장마","기온"]
+        var tantan7=["天気","天気予報","晴れ","雨","曇り","雪","台風","雷","梅雨","気温"]
+        var tango=[]
+        var tantan=[]
+        var now = 0
+        var i=0
+        var seito=0
+        function kantango(){
+            seito=0
+            document.getElementById("kotae").value=""
+            var num = document.getElementById("level").selectedIndex;
+            if(num==0){
+                    alert('レベルが選択されていません。')
+                    return
+            }else{
+                    document.getElementById("box12").style.display = "block";
+                    seito=0
+                    i=0
+                    now=num
+                    eval("tango=tango"+num)
+                    eval("tantan=tantan"+num)
+                    document.getElementById("monda").innerHTML=tango[i]
+                    document.getElementById("moji").innerHTML=tantan[i].length+"文字で回答"
+                    document.getElementById("mono2").style.display = "none";
+                    document.getElementById("mono").style.display = "none";
+            }
+        }
+        function kaitou(){
+            if (now==0){
+                alert("まずレベルを選択してください。");
+                return;
+            }
+            var kaito=document.getElementById("kotae").value
+            if (kaito==tantan[i]){
+                document.getElementById("mono2").style.display = "inline-block";
+                document.getElementById("mono").style.display = "none";
+                document.getElementById("mono2").innerHTML="正解<br>正答:"+tantan[i]+"<br>回答:"+kaito; 
+                seito+=1
+            }else{
+                document.getElementById("mono2").style.display = "none";
+                document.getElementById("mono").style.display = "inline-block";
+                document.getElementById("mono").innerHTML="不正解<br>正答:"+tantan[i]+"<br>回答:"+kaito;
+            }
+            i+=1
+            if(i==tantan.length){
+                document.getElementById("monda").innerHTML="終了<br>正答数：１０問中"+seito+"問"
+                now=0
+                return;
+            }
+            document.getElementById("monda").innerHTML=tango[i]
+            document.getElementById("moji").innerHTML=tantan[i].length+"文字で回答"
+            document.getElementById("kotae").value=""
+        }
+        function openTwitter(text,url,hash,account) {
+	        var turl = "https://twitter.com/intent/tweet?text="+text+"&url="+url+"&hashtags="+hash+"&via="+account;
+	        window.open(turl,'_blank');
+        }
+        function botan(){
+            var num = document.getElementById("level").selectedIndex;
+            openTwitter("☆瞬間韓単語☆　レベル"+num+"で１０問中"+seito+"問正解しました！","https://syunkaneitango.herokuapp.com/hang.html","瞬間韓単語","なっかのう");
+        }
+    </script>
+</body>
+</html>
